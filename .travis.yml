@@ -7,7 +7,7 @@ services:
 
 install:
 
-before_script: 
+before_script:
 
 script:
     - docker build -t udagram-api-feed .
