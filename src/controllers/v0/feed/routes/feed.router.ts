@@ -8,6 +8,7 @@ import * as c from '../../../../config/config';
 const router: Router = Router();
 
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
+  console.log("checking auth header:", req.headers.authorization)
   if (!req.headers || !req.headers.authorization) {
     return res.status(401).send({message: 'No authorization headers.'});
   }
