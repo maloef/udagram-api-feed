@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: udagram-api-feed
   labels:
-    app: udagram-api-feed
+    service: udagram-api-feed
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: udagram-api-feed
+      service: udagram-api-feed
   template:
     metadata:
       labels:
-        app: udagram-api-feed
+        service: udagram-api-feed
     spec:
       containers:
       - name: udagram-api-feed
-        image: maloef/udagram-api-feed
+        image: maloef/udagram-api-feed:v1
         ports:
         - containerPort: 80
         env:
@@ -65,5 +65,4 @@ spec:
             secretKeyRef:
               name: env-secret
               key: POSTGRES_PASSWORD
-
 
