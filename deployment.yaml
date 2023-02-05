@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
       - name: udagram-api-feed
-        image: maloef/udagram-api-feed:v1
+        image: maloef/udagram-api-feed:v2
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         env:
         - name: AWS_BUCKET
           valueFrom:
