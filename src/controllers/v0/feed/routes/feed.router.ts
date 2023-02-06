@@ -58,6 +58,7 @@ router.get('/signed-url/:fileName',
       console.log("getting signed url for file", fileName)
 
       const url = AWS.getPutSignedUrl(fileName);
+      console.info("signed url received:", url)
       res.status(201).send({url: url});
     });
 
@@ -65,6 +66,7 @@ router.get('/signed-url/:fileName',
 router.post('/',
     requireAuth,
     async (req: Request, res: Response) => {
+      console.log("trying to post file")
       const caption = req.body.caption;
       const fileName = req.body.url; // same as S3 key name
       console.log("uploading file", fileName, "with caption", caption)
