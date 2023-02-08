@@ -65,5 +65,14 @@ spec:
             secretKeyRef:
               name: env-secret
               key: POSTGRES_PASSWORD
-
+        - name: aws_access_key_id
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: AWS_ACCESS_KEY_ID
+        - name: aws_secret_access_key
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: AWS_SECRET_ACCESS_KEY
 
