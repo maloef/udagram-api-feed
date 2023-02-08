@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: udagram-api-feed
-        image: maloef/udagram-api-feed:v3
+        image: maloef/udagram-api-feed:v4
         ports:
         - containerPort: 8080
         env:
@@ -65,4 +65,14 @@ spec:
             secretKeyRef:
               name: env-secret
               key: POSTGRES_PASSWORD
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: env-secret
+              key: AWS_SECRET_ACCESS_KEY
 
