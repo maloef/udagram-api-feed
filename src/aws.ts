@@ -33,3 +33,14 @@ export function getPutSignedUrl( key: string ): string {
     Expires: signedUrlExpireSeconds,
   });
 }
+
+// Generates an AWS signed URL for uploading objects
+export function getPutSignedUrlPromise( key: string ): Promise<string> {
+  const signedUrlExpireSeconds = 60 * 5;
+
+  return s3.getSignedUrlPromise('putObject', {
+    Bucket: config.aws_media_bucket,
+    Key: key,
+    Expires: signedUrlExpireSeconds,
+  });
+}

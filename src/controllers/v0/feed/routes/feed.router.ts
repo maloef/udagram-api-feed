@@ -55,10 +55,11 @@ router.get('/signed-url/:fileName',
     requireAuth,
     async (req: Request, res: Response) => {
       const {fileName} = req.params;
-      console.log("getting signed url for file", fileName)
+      console.log("getting signed url for file (using await)", fileName)
 
-      const url = AWS.getPutSignedUrl(fileName);
-      console.info("signed url received:", url)
+      const url = await AWS.getPutSignedUrlPromise(fileName);
+      //const url = AWS.getPutSignedUrl(fileName);
+      console.info("signed url received after waiting:", url)
       res.status(201).send({url: url});
     });
 
