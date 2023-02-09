@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: udagram-api-feed
-        image: maloef/udagram-api-feed:v10
+        image: maloef/udagram-api-feed:v11
         ports:
         - containerPort: 8080
         env:

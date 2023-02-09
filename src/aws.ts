@@ -3,8 +3,6 @@ import {config} from './config/config';
 
 
 // Configure AWS
-/*const credentials = new AWS.SharedIniFileCredentials({profile: config.aws_profile});
-AWS.config.credentials = credentials;*/
 AWS.config.credentials = new AWS.Credentials(config.aws_access_key_id, config.aws_secret_access_key)
 
 export const s3 = new AWS.S3({
@@ -35,7 +33,7 @@ export function getPutSignedUrl( key: string ): string {
   });
 }
 
-// Generates an AWS signed URL for uploading objects
+// This is better than getPutSignedUrl: if there is a problem, an HTTP error instead of a HTTP 200 with a generic URL is returned
 export function getPutSignedUrlPromise( key: string ): Promise<string> {
   const signedUrlExpireSeconds = 60 * 10;
 

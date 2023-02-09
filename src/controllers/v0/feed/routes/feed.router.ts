@@ -44,7 +44,7 @@ router.get('/', async (req: Request, res: Response) => {
 router.get('/:id',
     async (req: Request, res: Response) => {
       const {id} = req.params;
-      console.log("getting feed item", id)
+      console.info("getting feed item", id)
 
       const item = await FeedItem.findByPk(id);
       res.send(item);
@@ -55,12 +55,11 @@ router.get('/signed-url/:fileName',
     requireAuth,
     async (req: Request, res: Response) => {
       const {fileName} = req.params;
-      console.log("getting signed url for file (using await)", fileName)
+      console.info("getting signed url for file", fileName, "- aws access key id is", AWS.s3.config.credentials.accessKeyId)
 
       const url = await AWS.getPutSignedUrlPromise(fileName);
-      //const url = AWS.getPutSignedUrl(fileName);
       console.info("signed url received after waiting:", url)
-      console.info("credentials: ", AWS.s3.config.credentials)
+      
       res.status(201).send({url: url});
     });
 
@@ -68,10 +67,10 @@ router.get('/signed-url/:fileName',
 router.post('/',
     requireAuth,
     async (req: Request, res: Response) => {
-      console.log("trying to post file")
+      console.info("trying to post file")
       const caption = req.body.caption;
       const fileName = req.body.url; // same as S3 key name
-      console.log("uploading file", fileName, "with caption", caption)
+      console.info("uploading file", fileName, "with caption", caption)
 
       if (!caption) {
         return res.status(400).send({message: 'Caption is required or malformed.'});
