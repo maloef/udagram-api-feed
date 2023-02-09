@@ -15,7 +15,7 @@ export function requireAuth(req: Request, res: Response, next: NextFunction) {
 
   const tokenBearer = req.headers.authorization.split(' ');
   if (tokenBearer.length != 2) {
-    return res.status(401).send({message: 'Malformed token.'});
+    return res.status(401).send({message: 'Malformed token:' + tokenBearer});
   }
 
   const token = tokenBearer[1];
@@ -60,6 +60,7 @@ router.get('/signed-url/:fileName',
       const url = await AWS.getPutSignedUrlPromise(fileName);
       //const url = AWS.getPutSignedUrl(fileName);
       console.info("signed url received after waiting:", url)
+      console.info("credentials: ", AWS.s3.config.credentials)
       res.status(201).send({url: url});
     });
 
